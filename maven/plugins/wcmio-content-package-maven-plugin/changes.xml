@@ -27,6 +27,9 @@
       <action type="fix" dev="sseifert" issue="WTOOL-47">
         Improve error handling when call to bundle status URL fails.
       </action>
+      <action type="update" dev="sseifert">
+        Add vault.verbose option to run package manager calls in verbose mode.
+      </action>
     </release>
 
     <release version="1.6.12" date="2018-05-22">

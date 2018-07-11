@@ -74,7 +74,8 @@ public final class PackageDownloader {
       log.info("Download " + file.getName() + " from " + props.getPackageManagerUrl());
 
       // 1st: try upload to get path of package - or otherwise make sure package def exists (no install!)
-      HttpPost post = new HttpPost(props.getPackageManagerUrl() + "/.json?cmd=upload");
+      HttpPost post = new HttpPost(props.getPackageManagerUrl() + "/.json?cmd=upload"
+          + (props.isVerbose() ? "&verbose=true" : ""));
       MultipartEntityBuilder entity = MultipartEntityBuilder.create()
           .addBinaryBody("package", file)
           .addTextBody("force", "true");
@@ -96,7 +97,8 @@ public final class PackageDownloader {
       log.info("Package path is: " + path + " - now rebuilding package...");
 
       // 2nd: build package
-      HttpPost buildMethod = new HttpPost(props.getPackageManagerUrl() + "/console.html" + path + "?cmd=build");
+      HttpPost buildMethod = new HttpPost(props.getPackageManagerUrl() + "/console.html" + path + "?cmd=build"
+          + (props.isVerbose() ? "&verbose=true" : ""));
       pkgmgr.executePackageManagerMethodHtmlOutputResponse(httpClient, buildMethod);
 
       // 3rd: download package

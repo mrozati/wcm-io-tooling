@@ -93,7 +93,8 @@ public class CrxPackageInstaller implements VendorPackageInstaller {
     }
 
     // prepare post method
-    HttpPost post = new HttpPost(url + "/.json?cmd=upload");
+    HttpPost post = new HttpPost(url + "/.json?cmd=upload"
+        + (props.isVerbose() ? "&verbose=true" : ""));
     HttpClientUtil.applyRequestConfig(post, packageFile, props);
     MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create()
         .addBinaryBody("package", packageFile.getFile());
@@ -113,6 +114,7 @@ public class CrxPackageInstaller implements VendorPackageInstaller {
 
         try {
           post = new HttpPost(url + "/console.html" + new URIBuilder().setPath(path).build().getRawPath() + "?cmd=install"
+              + (props.isVerbose() ? "&verbose=true" : "")
               + (packageFile.isRecursive() ? "&recursive=true" : ""));
           HttpClientUtil.applyRequestConfig(post, packageFile, props);
         }

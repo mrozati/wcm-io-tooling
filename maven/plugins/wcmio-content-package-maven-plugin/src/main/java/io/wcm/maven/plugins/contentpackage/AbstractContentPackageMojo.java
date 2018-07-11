@@ -146,6 +146,12 @@ abstract class AbstractContentPackageMojo extends AbstractMojo {
   @Parameter(property = "vault.httpSocketTimeoutSec", defaultValue = "60")
   private int httpSocketTimeout;
 
+  /**
+   * If set to true the package manager is called in 'verbose' mode.
+   */
+  @Parameter(property = "vault.verbose", defaultValue = "false")
+  private boolean verbose;
+
   @Parameter(property = "session", defaultValue = "${session}", readonly = true)
   private MavenSession session;
 
@@ -175,6 +181,7 @@ abstract class AbstractContentPackageMojo extends AbstractMojo {
     props.setHttpConnectTimeoutSec(this.httpConnectTimeoutSec);
     props.setHttpSocketTimeoutSec(this.httpSocketTimeout);
     props.setProxies(ProxySupport.getMavenProxies(session, decrypter));
+    props.setVerbose(this.verbose);
 
     return props;
   }

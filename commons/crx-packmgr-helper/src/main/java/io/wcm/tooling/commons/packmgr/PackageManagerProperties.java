@@ -39,6 +39,7 @@ public final class PackageManagerProperties {
   private boolean relaxedSSLCheck;
   private int httpConnectTimeoutSec = 10;
   private int httpSocketTimeoutSec = 60;
+  private boolean verbose;
   private List<Proxy> proxies;
 
   /**
@@ -183,6 +184,18 @@ public final class PackageManagerProperties {
 
   public void setHttpSocketTimeoutSec(int httpSocketTimeoutSec) {
     this.httpSocketTimeoutSec = httpSocketTimeoutSec;
+  }
+
+  /**
+   * If set to true package manager calls are done in "verbose" mode.
+   * @return Verbose mode
+   */
+  public boolean isVerbose() {
+    return this.verbose;
+  }
+
+  public void setVerbose(boolean verbose) {
+    this.verbose = verbose;
   }
 
   /**
